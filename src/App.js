@@ -3,15 +3,18 @@ import { AuthProvider } from "./components/context/AuthContext";
 import Account from "./components/form/Account";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Profile from "./components/dashboard/Profile";
+import { useAuth } from "./components/context/AuthContext";
 
 function App() {
   return (
     <AuthProvider>
       <Router>
         <div className="App">
-          <Account />
           <Routes>
-            <Route path="/profile" component={Profile}></Route>
+            <Route exact path="/" element={<Account />}></Route>
+          </Routes>
+          <Routes>
+            <Route path="/profile" element={<Profile />}></Route>
           </Routes>
         </div>
       </Router>

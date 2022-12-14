@@ -27,8 +27,10 @@ const Account = () => {
   if (status === "success") {
     return (
       <div className="successMsg">
-        <h1>Congrats</h1>
-        <Link to="/">Login</Link>;
+        <h1 className="success">
+          Congrats, Account Successfully created. Please login
+        </h1>
+        <p className="successBtn">please refresh this tab to login</p>
       </div>
     );
   }

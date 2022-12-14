@@ -35,7 +35,6 @@ const Account = () => {
     );
   }
 
-  console.log(currentUser);
   const submitUser = async (e) => {
     e.preventDefault();
 

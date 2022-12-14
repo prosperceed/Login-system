@@ -1,27 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { AuthProvider } from "./components/context/AuthContext";
 import Account from "./components/form/Account";
+import { BrowserRouter as router, route, routes } from "react-router-dom";
 
 function App() {
-  const [backend, setBackend] = useState([{}]);
-
-  useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => {
-        setBackend(data);
-      });
-  }, []);
   return (
-    <div className="App">
-      {typeof backend.users === "undefined" ? (
-        <p>loading...</p>
-      ) : (
-        backend.users.map((user, i) => {
-          <p key={i}>{user}</p>;
-        })
-      )}
-      <Account />
-    </div>
+    <AuthProvider>
+      <div className="App">
+        <Account />
+      </div>
+    </AuthProvider>
   );
 }
 

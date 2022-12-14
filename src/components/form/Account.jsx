@@ -59,6 +59,11 @@ const Account = () => {
         setTimeout(() => {
           setError("");
         }, 2200);
+      } else {
+        setError(errorCode.substring(5));
+        setTimeout(() => {
+          setError("");
+        }, 3000);
       }
     }
   };
@@ -74,7 +79,10 @@ const Account = () => {
       navigate("/profile");
     } catch (error) {
       const errorCode = error.code;
-      alert(errorCode);
+      setError(errorCode.substring(5));
+      setTimeout(() => {
+        setError("");
+      }, 3000);
     }
   };
 

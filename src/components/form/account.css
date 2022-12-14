@@ -7,9 +7,26 @@
 }
 
 .form {
+  display: flex;
+  flex-direction: column;
   padding: 2rem 3rem;
   background-color: #c3c3c3;
   overflow: hidden;
+}
+
+.formDesc {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.switchBtn {
+  background: rgb(77, 161, 194);
+  padding: 1rem;
+  cursor: pointer;
+  color: white;
+  width: fit-content;
+  border-radius: 0.5rem;
 }
 
 .formGroup {
@@ -56,7 +73,7 @@
   background: white;
   border-radius: 0.4rem;
   text-align: center;
-  padding: 0.5rem;
+  padding: 0.2rem;
 }
 
 .errorMsg {

@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import "./account.css";
 import Profile from "../dashboard/Profile";
 import { useAuth } from "../context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -15,7 +15,7 @@ const Account = () => {
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
   const emailRef = useRef();
-  // const history = useHistory();
+  const navigate = useNavigate();
   const nameRef = useRef();
   const auth = getAuth(app);
 
@@ -25,7 +25,12 @@ const Account = () => {
   const [error, setError] = useState("");
 
   if (status === "success") {
-    return <h1>Done!</h1>;
+    return (
+      <div className="successMsg">
+        <h1>Congrats</h1>
+        <Link to="/">Login</Link>;
+      </div>
+    );
   }
 
   console.log(currentUser);
@@ -44,7 +49,8 @@ const Account = () => {
         passwordRef.current.value
       );
       // const user = userCredential.user;
-      alert("user created!");
+      setStatus("success");
+      // alert("user created!");
     } catch (error) {
       const errorCode = error.code;
       if (errorCode === "auth/weak-password") {
@@ -57,16 +63,15 @@ const Account = () => {
     }
   };
 
-  const loginUser = (e) => {
+  const loginUser = async (e) => {
     e.preventDefault();
     try {
-      signInWithEmailAndPassword(
+      await signInWithEmailAndPassword(
         auth,
         emailRef.current.value,
         passwordRef.current.value
       );
-      alert("logged in");
-      <Link to="profile" />;
+      navigate("/profile");
     } catch (error) {
       const errorCode = error.code;
       alert(errorCode);
@@ -79,8 +84,11 @@ const Account = () => {
 
   return (
     <div className="userForm">
-      <h3 onClick={handleSwitch}>{userSwitch ? "Register" : "Login"}</h3>
       <div className="form">
+        <h3 className="formDesc">User Authentication System</h3>
+        <h3 className="switchBtn" onClick={handleSwitch}>
+          {userSwitch ? "Register" : "Login"}
+        </h3>
         <div className="formGroup">
           {currentUser && currentUser.displayName}
           {!userSwitch ? (
@@ -120,7 +128,7 @@ const Account = () => {
             disabled={status === "submitting"}
             className="submitBtn"
           >
-            {!userSwitch ? "Submit" : "Login"}
+            {userSwitch ? "Submit" : "Login"}
           </button>
         </div>
         {/* <div className="options">

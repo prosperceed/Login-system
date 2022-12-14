@@ -4,6 +4,7 @@ import Account from "./components/form/Account";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Profile from "./components/dashboard/Profile";
 import { useAuth } from "./components/context/AuthContext";
+import PasswordReset from "./components/reset/PasswordReset";
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
           </Routes>
           <Routes>
             <Route path="/profile" element={<Profile />}></Route>
+          </Routes>
+          <Routes>
+            <Route path="/PasswordReset" element={<PasswordReset />}></Route>
           </Routes>
         </div>
       </Router>

@@ -6,18 +6,18 @@ import { getAuth, signOut } from "firebase/auth";
 import "./profile.css";
 
 const Profile = () => {
-  const { currentUser } = useAuth;
+  const { currentUser } = useAuth();
 
-  const navigate = useNavigate();
+  let navigate = useNavigate();
   const auth = getAuth(app);
 
-  const signOut = (e) => {
+  const logout = (e) => {
     e.preventDefault();
     // const auth = getAuth();
     signOut(auth)
       .then(() => {
         // Sign-out successful.
-        alert("logged out");
+        alert("You're logged out");
         navigate("/");
       })
       .catch((error) => {
@@ -26,16 +26,10 @@ const Profile = () => {
       });
   };
 
-  useEffect(() => {
-    if (currentUser) {
-      navigate("profile");
-    }
-  }, [navigate]);
-
   return (
     <div className="dashboard">
       <div className="profileTop">
-        <button onClick={signOut} className="signoutBtn">
+        <button onClick={logout} className="signoutBtn">
           Logout
         </button>
       </div>
@@ -49,9 +43,7 @@ const Profile = () => {
             </p>
             <p className="email">
               Email:{" "}
-              <small className="nameText">
-                {currentUser && currentUser.email}
-              </small>
+              <small className="nameText">{auth.currentUser.email}</small>
             </p>
           </div>
         </div>

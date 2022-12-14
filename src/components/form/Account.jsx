@@ -1,6 +1,5 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./account.css";
-import Profile from "../dashboard/Profile";
 import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -23,6 +22,11 @@ const Account = () => {
 
   const [status, setStatus] = useState("typing");
   const [error, setError] = useState("");
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     navigate("/profile");
+  //   }
+  // }, [navigate]);
 
   if (status === "success") {
     return (
@@ -42,7 +46,6 @@ const Account = () => {
       return setError("Passwords do not match!");
     }
 
-    // const auth = getAuth();
     try {
       await createUserWithEmailAndPassword(
         auth,
@@ -140,11 +143,7 @@ const Account = () => {
             {userSwitch ? "Submit" : "Login"}
           </button>
         </div>
-        {/* <div className="options">
-          <p>
-            You want to {!userSwitch ? "registered?" : "Login"}? {!userSwitch ? (<a>Login</a>) : <a>Login</a>}
-          </p>
-        </div> */}
+        {!userSwitch ? <Link to="passwordReset">Reset password?</Link> : ""}
         {error && (
           <div className="error">
             <p className="errorMsg">{error}</p>

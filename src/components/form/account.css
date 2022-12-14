@@ -80,3 +80,7 @@
 .errorMsg {
   color: red;
 }
+
+.successMsg {
+  color: green;
+}

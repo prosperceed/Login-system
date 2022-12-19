@@ -7,7 +7,6 @@ import "./profile.css";
 
 const Profile = () => {
   const { currentUser } = useAuth();
-
   let navigate = useNavigate();
   const auth = getAuth(app);
 
@@ -39,11 +38,11 @@ const Profile = () => {
           <div className="dashContent">
             <h3>Your profile</h3>
             <p className="name">
-              Name: <small className="nameText">coming soon!</small>
+              Name:{" "}
+              <small className="nameText">{currentUser.displayName}</small>
             </p>
             <p className="email">
-              Email:{" "}
-              <small className="nameText">{auth.currentUser.email}</small>
+              Email: <small className="nameText">{currentUser.email}</small>
             </p>
           </div>
         </div>

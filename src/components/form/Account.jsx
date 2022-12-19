@@ -6,6 +6,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import app from "../firebase/firebase";
 
@@ -50,8 +51,28 @@ const Account = () => {
       await createUserWithEmailAndPassword(
         auth,
         emailRef.current.value,
-        passwordRef.current.value
+        passwordRef.current.value,
+        nameRef.current.value
       );
+
+      updateProfile(auth.currentUser, {
+        displayName: nameRef.current.value,
+      })
+        .then(() => {
+          // Profile updated!
+          // ...
+          console.log(currentUser.displayName);
+        })
+        .catch((error) => {
+          // An error occurred
+          // ...
+        });
+
+      //.then((user) => {
+      //   user.user.updateProfile({
+      //     displayName: nameRef,
+      //   });
+      // });
       // const user = userCredential.user;
       setStatus("success");
       // alert("user created!");

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import app from "../firebase/firebase";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const AuthContext = createContext();
 
@@ -13,7 +13,7 @@ export function AuthProvider({ children }) {
   const auth = getAuth(app);
 
   useEffect(() => {
-    const signed = auth.onAuthStateChanged((user) => {
+    const signed = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
     });
     return signed;

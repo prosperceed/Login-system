@@ -68,12 +68,6 @@ const Account = () => {
           // ...
         });
 
-      //.then((user) => {
-      //   user.user.updateProfile({
-      //     displayName: nameRef,
-      //   });
-      // });
-      // const user = userCredential.user;
       setStatus("success");
       // alert("user created!");
     } catch (error) {
@@ -123,7 +117,6 @@ const Account = () => {
           {userSwitch ? "Register" : "Login"}
         </h3>
         <div className="formGroup">
-          {currentUser && currentUser.displayName}
           {!userSwitch ? (
             <></>
           ) : (
